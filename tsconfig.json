@@ -9,19 +9,7 @@
     "esModuleInterop": true,
     "jsx": "react",
     "lib": ["dom", "es2017"],
-    "baseUrl": ".",
-    "paths": {
-      "@varian/*": ["./themes/custom/varian/webpack/*"]
-    },
-    "typeRoots": [
-      "./node_modules/@types",
-      "./themes/custom/varian/webpack/@types"
-    ]
-  },
-  "exclude": ["node_modules"],
-  "include": [
-    "./themes/custom/varian/webpack/components/**/*",
-    "./themes/custom/varian/webpack/services/*",
-    "./modules/custom/varian_editor/tools/js/source/**/*"
-  ]
+    "baseUrl": "../",
+    "typeRoots": ["./node_modules/@types"]
+  }
 }

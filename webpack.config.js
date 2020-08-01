@@ -8,17 +8,7 @@
 
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
-const themeDirectory = path.resolve(__dirname, './themes/custom/varian/');
-const moduleDirectory = path.resolve(__dirname, './modules/custom');
-
-/**
- * Get Source Directory.
- */
-const getSourceDirectory = (subDirectory, themeDirectory = true) => {
-  const relativePath = themeDirectory ? './themes/custom/varian/webpack' : './';
-  return path.join(__dirname, relativePath, subDirectory);
-};
+const gitDirectory = path.resolve(__dirname, '../');
 
 /**
  * Webpack Common Config.
@@ -29,10 +19,6 @@ const config = {
   watch: false,
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.scss'],
-    alias: {
-      'react-hook-form': 'react-hook-form/dist/index.ie11',
-      '@varian': getSourceDirectory(''),
-    },
   },
   module: {
     rules: [
@@ -87,14 +73,14 @@ const config = {
 /**
  * Varian Content Editor Module.
  */
-const editorToolsConfig = Object.assign({}, config, {
-  name: 'editor-tools-module',
+const inviewportConfig = Object.assign({}, config, {
+  name: 'javascript-inviewport',
   entry: {
-    'editor-tools': `${moduleDirectory}/varian_editor_tools/js/source/editor-tools`,
+    'editor-tools': `${gitDirectory}/javascript-inViewport`,
   },
   output: {
-    filename: 'js/build/[name].js',
-    path: `${moduleDirectory}/varian_editor_tools/`,
+    filename: 'inviewport.min.js',
+    path: `${gitDirectory}/javascript-inViewport/`,
     libraryTarget: 'window',
   },
   plugins: [
@@ -106,58 +92,4 @@ const editorToolsConfig = Object.assign({}, config, {
   ],
 });
 
-/**
- * Varian Content Editor Module.
- */
-const campaignTrackerConfig = Object.assign({}, config, {
-  name: 'campaign-tracker-module',
-  entry: {
-    'campaign-tracker-admin': `${moduleDirectory}/varian_campaign_tracker/js/source/campaign-tracker-entry`,
-    'campaign-tracker': `${moduleDirectory}/varian_campaign_tracker/js/source/components/campaign-tracker`,
-  },
-  output: {
-    filename: 'js/build/[name].js',
-    path: `${moduleDirectory}/varian_campaign_tracker/`,
-    libraryTarget: 'window',
-  },
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: 'css/campaign-tracker.css',
-      chunkFilename: 'css/campaign-tracker.css',
-      ignoreOrder: false,
-    }),
-  ],
-});
-
-/**
- * Varian Theme Config.
- */
-const themeConfig = Object.assign({}, config, {
-  name: 'varian-theme',
-  entry: {
-    bundle: `${themeDirectory}/webpack/index`,
-    external: `${themeDirectory}/webpack/external-index`,
-  },
-  output: {
-    filename: '[name].js',
-    path: `${themeDirectory}/build/js/`,
-    libraryTarget: 'window',
-  },
-  externals: [
-    {
-      react: 'React',
-      'react-dom': 'ReactDOM',
-    },
-    /\bcore-js\b/,
-    /^(jquery|\$)$/i,
-  ],
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: '../css/[name].css',
-      chunkFilename: '../css/[id].css',
-      ignoreOrder: false,
-    }),
-  ],
-});
-
-module.exports = [themeConfig, editorToolsConfig, campaignTrackerConfig];
+module.exports = [inviewportConfig];
