@@ -71,25 +71,19 @@ const config = {
 };
 
 /**
- * Varian Content Editor Module.
+ * JavaScript inViewport.
  */
 const inviewportConfig = Object.assign({}, config, {
   name: 'javascript-inviewport',
   entry: {
-    'editor-tools': `${gitDirectory}/javascript-inViewport`,
+    inviewport: `${gitDirectory}/javascript-inViewport/inviewport`,
+    'viewport-example': `${gitDirectory}/javascript-inViewport/viewport-example`,
   },
   output: {
-    filename: 'inviewport.min.js',
+    filename: '[name].min.js',
     path: `${gitDirectory}/javascript-inViewport/`,
     libraryTarget: 'window',
   },
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: 'css/[name].css',
-      chunkFilename: 'css/[id].css',
-      ignoreOrder: false,
-    }),
-  ],
 });
 
 module.exports = [inviewportConfig];
