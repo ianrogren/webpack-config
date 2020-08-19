@@ -86,4 +86,27 @@ const inviewportConfig = Object.assign({}, config, {
   },
 });
 
-module.exports = [inviewportConfig];
+/**
+ * JavaScript inViewport.
+ */
+const undercoverConfig = Object.assign({}, config, {
+  name: 'undercover-chrome',
+  entry: {
+    undercover: `${gitDirectory}/undercover-chrome/source/undercover`,
+    background: `${gitDirectory}/undercover-chrome/source/background`,
+  },
+  output: {
+    filename: './build/[name].min.js',
+    path: `${gitDirectory}/undercover-chrome/`,
+    libraryTarget: 'window',
+  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: './build/[name].min.css',
+      chunkFilename: './build/[name].min.css',
+      ignoreOrder: false,
+    }),
+  ],
+});
+
+module.exports = [inviewportConfig, undercoverConfig];

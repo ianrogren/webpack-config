@@ -5,11 +5,12 @@
     "allowJs": true,
     "noEmit": true,
     "strict": true,
-    "isolatedModules": true,
     "esModuleInterop": true,
     "jsx": "react",
-    "lib": ["dom", "es2017"],
+    "lib": ["dom", "es2017", "dom.iterable"],
     "baseUrl": "../",
     "typeRoots": ["./node_modules/@types"]
-  }
+  },
+  "exclude": ["node_modules"],
+  "include": ["../javascript-inViewport/**/*", "../undercover-chrome/**/*"]
 }
