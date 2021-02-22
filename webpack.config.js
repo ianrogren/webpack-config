@@ -109,4 +109,25 @@ const undercoverConfig = Object.assign({}, config, {
   ],
 });
 
-module.exports = [inviewportConfig, undercoverConfig];
+/**
+ * JavaScript inViewport.
+ */
+const startpageConfig = Object.assign({}, config, {
+  name: 'startpage',
+  entry: {
+    startpage: `${gitDirectory}/startpage/source/startpage`,
+  },
+  output: {
+    filename: './build/[name].min.js',
+    path: `${gitDirectory}/startpage/`,
+    libraryTarget: 'window',
+  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: './build/[name].min.css',
+      chunkFilename: './build/[name].min.css',
+      ignoreOrder: false,
+    }),
+  ],
+});
+module.exports = [startpageConfig];
